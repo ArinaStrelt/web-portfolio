@@ -721,28 +721,15 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
           }
       }
 
+@media (max-width: 760px) {
+  .hero-chat > span,
+  .hero-chat > svg,
+  .hero-chat::after {
+    display: none !important;
+    content: none !important;
+  }
+}
 
-      .hero-chat > span,
-      .hero-chat > svg {
-          display: none !important;
-      }
-
-      .hero-chat {
-          position: relative;
-      }
-
-          .hero-chat::after {
-              content: "";
-              position: absolute;
-              right: 5%;
-              top: 50%;
-              width: 34px;
-              height: 34px;
-              background-color: white;
-              clip-path: polygon( 5% 83%, 62% 26%, 42% 26%, 42% 10%, 91% 10%, 91% 59%, 75% 59%, 75% 39%, 18% 96% );
-              transform: translateY(-50%);
-              pointer-events: none;
-          }
 </style>
 
 
