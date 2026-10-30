@@ -115,7 +115,7 @@ body[data-route="illustrations"] .work-hero, body[data-route="concepts"] .work-h
 .game-screens { display: grid; gap: min(.7vw,13px); min-width: 0; }
 .game-screens .artwork-zoom:first-child { aspect-ratio: 1248/681; }
 .game-screens .artwork-zoom:nth-child(2) { aspect-ratio: 1248/629; }
-.game-hand { position: absolute; width: 9.32%; height: auto; left: 5%; top: 6.3vw; pointer-events: none; transform-origin: 50% 0; transform: rotate(25.82deg); z-index: 3; }
+.game-hand { position: absolute; width: 9.32%; height: auto; left: 5%; top: 3.5vw; pointer-events: none; transform-origin: 50% 0; transform: rotate(25.82deg); z-index: 3; }
 
 .section-switcher { display: flex; justify-content: space-between; align-items: center; gap: 28px; padding: 0 12.25%; margin: min(8.3vw,160px) auto min(7.1vw,136px); }
 .section-switcher a { display: flex; align-items: center; gap: min(2.6vw,50px); text-decoration: none; font-size: clamp(21px,3.33vw,64px); line-height: 1.25; white-space: nowrap; transition: color .2s; }
@@ -146,10 +146,9 @@ body[data-route="illustrations"] .section-switcher { margin-top: min(8.3vw,160px
 .potion-row { display: grid; grid-template-columns: 45% 55%; gap: min(.89vw,17px); margin-top: min(.89vw,17px); }
 .potion-row > .artwork-zoom { aspect-ratio: 865/393; }
 .potion-row > .artwork-zoom:last-child { aspect-ratio: 1038/393; }
-.hunters-row { display: grid; grid-template-columns: 1fr 1fr; gap: min(.74vw,14px); padding: 0 2.35%; }
+.hunters-row { display: grid; grid-template-columns: 1fr 1fr; gap: min(.74vw,14px); padding: 0; }
 .hunter-art { position: relative; min-width: 0; }
 .hunter-art .artwork-zoom { aspect-ratio: 908/564; }
-.hunter-art span { position: absolute; left: 2.2%; top: 3.2%; padding: .3em .5em; pointer-events: none; font-size: clamp(18px,2.08vw,40px); background: #8c8c8c; color: #121212; }
 .cave-intro { display: grid; grid-template-columns: 35.1% 22.1% minmax(0,1fr); gap: 0; min-height: min(49.45vw,949px); align-items: start; }
 .cave-intro .artwork-zoom { aspect-ratio: 673/949; background: white; }
 .cave-intro .artwork-zoom img { object-fit: cover; object-position: left center; }
@@ -158,12 +157,12 @@ body[data-route="illustrations"] .section-switcher { margin-top: min(8.3vw,160px
 body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); margin-bottom: min(7.1vw,136px); }
 
 /* Enlarged artwork: image is never modified or redrawn. */
-.art-dialog { border: 0; padding: 32px 32px 18px; width: min(95vw,1600px); max-width: none; max-height: 94vh; background: #171717; color: white; box-shadow: 0 20px 80px rgba(0,0,0,.42); }
-.art-dialog::backdrop { background: rgba(0,0,0,.85); }
+.art-dialog { border: none; padding: 32px 32px 18px; width: min(95vw,1600px); max-width: none; max-height: 94vh; background: transparent; color: white; box-shadow: none; }
+.art-dialog::backdrop { background: rgba(0,0,0,0.9); }
 .dialog-close { border: 0; position: absolute; right: 12px; top: 4px; width: 45px; height: 45px; font-size: 35px; line-height: 1; color: white; background: transparent; cursor: pointer; z-index: 1; }
 .dialog-figure { margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .dialog-figure img { display: block; max-height: calc(94vh - 95px); max-width: 100%; width: auto; height: auto; object-fit: contain; }
-.dialog-figure figcaption { padding: 12px 0 0; font-size: 14px; text-align: center; opacity: .85; }
+.dialog-figure figcaption { padding: 12px 0 0; font-size: 24px; text-align: center; opacity: .85; }
 
 @media (min-width: 1921px) {
   .home-hero, .work-hero, body[data-route="illustrations"] .work-hero, body[data-route="concepts"] .work-hero { min-height: 0; }
@@ -238,7 +237,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .art-separator { height: 8px; margin: 9px 0; }
   .potion-row { gap: 8px; margin-top: 8px; }
   .hunters-row { padding: 0 2%; gap: 8px; }
-  .hunter-art span { font-size: clamp(10px,2.2vw,20px); }
+ 
   .cave-intro { grid-template-columns: 1fr 1fr; min-height: auto; gap: 0; padding-right: 4%; }
   .cave-intro .concept-description { grid-column: 2; padding: 6px 0 0 10px; }
   .cave-copy h2 { font-size: 23px; }
@@ -283,7 +282,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
 }
 
 /* Artwork navigation works with touch or mouse. */
-.dialog-controls { display: flex; justify-content: space-between; align-items: center; margin: 12px auto 0; max-width: 320px; }
+.dialog-controls { display: none !important; }
 .dialog-controls[hidden] { display: none; }
 .dialog-step { border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.07); color: #fff; font-size: 23px; cursor: pointer; width: 52px; height: 44px; }
 .dialog-step:hover { background: rgba(255,255,255,.2); }
@@ -450,7 +449,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .work-hero-titles { top: auto; bottom: 16%; left: 5%; }
   .work-hero-titles p { font-size: clamp(21px,5.1vw,27px); }
   .work-hero-titles h1 { font-size: clamp(30px, 8.4vw,45px); line-height: 1.08; }
-  .project-title { margin: 29px 5% 22px; font-size: clamp(30px, 8.2vw,42px); line-height: 1.05; overflow-wrap: anywhere; }
+  .project-title { margin: 29px 5% 22px; font-size: clamp(30px, 8.2vw,42px); line-height: 1.05; overflow-wrap: anywhere; word-break: normal; }
   .game-layout { gap: 16px; }
   .game-aside { display: flex; flex-direction: column; gap: 18px; }
   .game-aside > .red-action { width: 100%; min-height: 56px; }
@@ -489,7 +488,6 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .potion-row, .hunters-row { grid-template-columns: minmax(0,1fr); gap: 10px; padding: 0 3%; }
   .potion-row > .artwork-zoom, .potion-row > .artwork-zoom:last-child { aspect-ratio: auto; }
   .potion-row img { width: 100%; height: auto; object-fit: contain; }
-  .hunter-art span { font-size: clamp(15px,4vw,22px); }
   .cave-intro { display: flex; flex-direction: column; padding: 0; }
   .cave-intro .artwork-zoom { width: 100%; aspect-ratio: 673/580; }
   .cave-intro .concept-description { padding: 21px 5% 12px; }
@@ -631,6 +629,25 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
 @media (max-width: 359px) {
   .tool-icon-procreate-frame { max-width: 55px; }
 }
+ .artwork-static {
+          cursor: default;
+      }
+
+  .artwork-static:hover img {
+              filter: none;
+       }
+
+      /* Align title and PLAAAY button to the left edge */
+      @media (min-width: 1101px) {
+          .game-content .project-title {
+              margin-left: 0;
+          }
+
+          .game-aside > .red-action {
+              margin-left: calc(-1 * min(4.16vw, 80px));
+              width: calc(100% + min(4.16vw, 80px));
+          }
+      }
 
 </style>
 
@@ -769,7 +786,7 @@ window.PORTFOLIO_IMAGESETS = {};
     <main class="work-page page-frame" id="page-content">
       ${workHero('game-art', 'gameHero', 'The power of making', 'GAME ART')}
       <div class="game-content">
-        <h2 class="project-title">YOUR FORM...INCOMPLORBED</h2>
+        <h2 class="project-title">YOUR FORM...<wbr>INCOMPLORBED</h2>
         <div class="game-layout">
           <div class="game-aside">
             <a class="red-action" href="https://twafla.itch.io/oh-my-glurp" target="_blank" rel="noopener noreferrer" title="Play Oh My Glurp on itch.io">PLAAAY <span aria-hidden="true">↗</span></a>
@@ -840,7 +857,9 @@ window.PORTFOLIO_IMAGESETS = {};
         </div>
         <div class="art-separator"></div>
         <div class="cave-intro">
-          ${zoom('conceptsHouse', 'Cave village concept — sculptural cliff-side houses')}
+          <div class="artwork-zoom artwork-static">
+            ${image('conceptsHouse', 'Cave village concept — sculptural cliff-side houses')}
+            </div>
           <div class="concept-description cave-copy">
             <h2>Cave village<br>(work in progress)</h2>
             <p>The concept made as a personal project.</p>
