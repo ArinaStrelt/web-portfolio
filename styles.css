@@ -1,3 +1,4 @@
+/* styles.css */
 :root {
   --red: #c0383a;
   --dark-red: #811919;
@@ -5,6 +6,7 @@
   --paper: #fff;
   --font: 'Outfit', 'Arial', sans-serif;
 }
+
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: white; color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; }
@@ -103,7 +105,7 @@ body[data-route="illustrations"] .work-hero, body[data-route="concepts"] .work-h
 .game-screens { display: grid; gap: min(.7vw,13px); min-width: 0; }
 .game-screens .artwork-zoom:first-child { aspect-ratio: 1248/681; }
 .game-screens .artwork-zoom:nth-child(2) { aspect-ratio: 1248/629; }
-.game-hand { position: absolute; width: 9.32%; height: auto; left: 5%; top: 6.3vw; pointer-events: none; transform-origin: 50% 0; transform: rotate(25.82deg); z-index: 3; }
+.game-hand { position: absolute; width: 9.32%; height: auto; left: 5%; top: 3.5vw; pointer-events: none; transform-origin: 50% 0; transform: rotate(25.82deg); z-index: 3; }
 
 .section-switcher { display: flex; justify-content: space-between; align-items: center; gap: 28px; padding: 0 12.25%; margin: min(8.3vw,160px) auto min(7.1vw,136px); }
 .section-switcher a { display: flex; align-items: center; gap: min(2.6vw,50px); text-decoration: none; font-size: clamp(21px,3.33vw,64px); line-height: 1.25; white-space: nowrap; transition: color .2s; }
@@ -134,10 +136,9 @@ body[data-route="illustrations"] .section-switcher { margin-top: min(8.3vw,160px
 .potion-row { display: grid; grid-template-columns: 45% 55%; gap: min(.89vw,17px); margin-top: min(.89vw,17px); }
 .potion-row > .artwork-zoom { aspect-ratio: 865/393; }
 .potion-row > .artwork-zoom:last-child { aspect-ratio: 1038/393; }
-.hunters-row { display: grid; grid-template-columns: 1fr 1fr; gap: min(.74vw,14px); padding: 0 2.35%; }
+.hunters-row { display: grid; grid-template-columns: 1fr 1fr; gap: min(.74vw,14px); padding: 0; }
 .hunter-art { position: relative; min-width: 0; }
 .hunter-art .artwork-zoom { aspect-ratio: 908/564; }
-.hunter-art span { position: absolute; left: 2.2%; top: 3.2%; padding: .3em .5em; pointer-events: none; font-size: clamp(18px,2.08vw,40px); background: #8c8c8c; color: #121212; }
 .cave-intro { display: grid; grid-template-columns: 35.1% 22.1% minmax(0,1fr); gap: 0; min-height: min(49.45vw,949px); align-items: start; }
 .cave-intro .artwork-zoom { aspect-ratio: 673/949; background: white; }
 .cave-intro .artwork-zoom img { object-fit: cover; object-position: left center; }
@@ -146,16 +147,17 @@ body[data-route="illustrations"] .section-switcher { margin-top: min(8.3vw,160px
 body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); margin-bottom: min(7.1vw,136px); }
 
 /* Enlarged artwork: image is never modified or redrawn. */
-.art-dialog { border: 0; padding: 32px 32px 18px; width: min(95vw,1600px); max-width: none; max-height: 94vh; background: #171717; color: white; box-shadow: 0 20px 80px rgba(0,0,0,.42); }
-.art-dialog::backdrop { background: rgba(0,0,0,.85); }
+.art-dialog { border: none; padding: 32px 32px 18px; width: min(95vw,1600px); max-width: none; max-height: 94vh; background: transparent; color: white; box-shadow: none; }
+.art-dialog::backdrop { background: rgba(0,0,0,0.9); }
 .dialog-close { border: 0; position: absolute; right: 12px; top: 4px; width: 45px; height: 45px; font-size: 35px; line-height: 1; color: white; background: transparent; cursor: pointer; z-index: 1; }
 .dialog-figure { margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .dialog-figure img { display: block; max-height: calc(94vh - 95px); max-width: 100%; width: auto; height: auto; object-fit: contain; }
-.dialog-figure figcaption { padding: 12px 0 0; font-size: 14px; text-align: center; opacity: .85; }
+.dialog-figure figcaption { padding: 12px 0 0; font-size: 24px; text-align: center; opacity: .85; }
 
 @media (min-width: 1921px) {
   .home-hero, .work-hero, body[data-route="illustrations"] .work-hero, body[data-route="concepts"] .work-hero { min-height: 0; }
 }
+
 @media (max-width: 1100px) {
   .desktop-nav { gap: 12px; }
   .header-email { display: none; }
@@ -166,6 +168,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .category-tile { min-height: 490px; }
   .section-switcher { padding-inline: 7%; }
 }
+
 @media (max-width: 760px) {
   .site-header { height: 72px; padding: 20px 5%; align-items: flex-start; }
   .site-signature { font-size: 17px; }
@@ -226,13 +229,14 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .art-separator { height: 8px; margin: 9px 0; }
   .potion-row { gap: 8px; margin-top: 8px; }
   .hunters-row { padding: 0 2%; gap: 8px; }
-  .hunter-art span { font-size: clamp(10px,2.2vw,20px); }
+
   .cave-intro { grid-template-columns: 1fr 1fr; min-height: auto; gap: 0; padding-right: 4%; }
   .cave-intro .concept-description { grid-column: 2; padding: 6px 0 0 10px; }
   .cave-copy h2 { font-size: 23px; }
   .cave-copy p { font-size: 14px; }
   .house-variations { margin-top: 10px; }
 }
+
 @media (max-width: 460px) {
   .home-hero { min-height: 620px; height: 620px; }
   .artist-portrait { width: 100%; left: -12%; top: 60px; height: 410px; }
@@ -271,7 +275,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
 }
 
 /* Artwork navigation works with touch or mouse. */
-.dialog-controls { display: flex; justify-content: space-between; align-items: center; margin: 12px auto 0; max-width: 320px; }
+.dialog-controls { display: none !important; }
 .dialog-controls[hidden] { display: none; }
 .dialog-step { border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.07); color: #fff; font-size: 23px; cursor: pointer; width: 52px; height: 44px; }
 .dialog-step:hover { background: rgba(255,255,255,.2); }
@@ -312,6 +316,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .cave-copy { grid-column: 2; padding: 18px 4%; }
   .section-switcher { padding-inline: 6%; }
 }
+
 @media (max-width: 1000px) {
   .site-header, .header-on-image { position: fixed; top: 0; left: 0; right: 0; height: 66px; padding: 10px 5%; display: flex; align-items: center; color: var(--red); background: rgba(255,255,255,.97); box-shadow: 0 2px 18px rgba(0,0,0,.055); border-bottom: 1px solid rgba(0,0,0,.075); z-index: 100; }
   .site-signature { min-height: 44px; display: flex; align-items: center; font-size: clamp(16px,2.5vw,21px); }
@@ -326,9 +331,11 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .mobile-nav a[aria-current="page"] { color: var(--red); font-weight: 700; }
   .work-hero::after { background: linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.22) 46%,rgba(0,0,0,.08) 100%); }
 }
+
 /* Mobile-first refinements. Figma artwork stays intact; only the layout adapts. */
 @media (max-width: 760px) {
   html { scroll-padding-top: 80px; }
+
   .site-header, .header-on-image {
     position: fixed;
     top: 0;
@@ -344,8 +351,10 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
     box-shadow: 0 2px 18px rgba(0,0,0,.055);
     z-index: 100;
   }
+
   .header-on-image .site-signature { color: var(--red); }
   .site-signature { font-size: clamp(16px, 3.1vw, 22px); }
+
   .menu-toggle {
     display: flex;
     flex: 0 0 44px;
@@ -359,10 +368,12 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
     background: transparent;
     touch-action: manipulation;
   }
+
   .menu-toggle span { height: 2px; width: 100%; transition: transform .2s, opacity .2s; }
   .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(7px) rotate(45deg); }
   .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-7px) rotate(-45deg); }
+
   .mobile-nav:not([hidden]) {
     position: fixed;
     top: 65px;
@@ -377,6 +388,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
     box-shadow: 0 16px 30px rgba(0,0,0,.13);
     z-index: 99;
   }
+
   .mobile-nav a {
     display: flex;
     align-items: center;
@@ -387,6 +399,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
     font-weight: 500;
     touch-action: manipulation;
   }
+
   .hero-chat span, .red-action span { opacity: 1; transform: none; padding-right: 0; }
   .category-tile { touch-action: manipulation; }
   .about-copy { min-width: 0; }
@@ -397,6 +410,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .work-hero-titles h1 { white-space: normal; }
   .section-switcher a { min-height: 48px; touch-action: manipulation; }
   .artwork-zoom { touch-action: manipulation; }
+
   .art-dialog {
     width: 100vw;
     max-width: 100vw;
@@ -404,9 +418,11 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
     padding: 58px 12px 16px;
     margin: auto;
   }
+
   .dialog-close { top: 5px; right: 8px; width: 48px; height: 48px; }
   .dialog-figure img { max-height: calc(100dvh - 130px); }
 }
+
 @media (max-width: 540px) {
   .home-hero { height: 620px; min-height: 620px; }
   .artist-portrait { left: -8%; top: 55px; width: 102%; height: 415px; object-position: left top; }
@@ -438,7 +454,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .work-hero-titles { top: auto; bottom: 16%; left: 5%; }
   .work-hero-titles p { font-size: clamp(21px,5.1vw,27px); }
   .work-hero-titles h1 { font-size: clamp(30px, 8.4vw,45px); line-height: 1.08; }
-  .project-title { margin: 29px 5% 22px; font-size: clamp(30px, 8.2vw,42px); line-height: 1.05; overflow-wrap: anywhere; }
+  .project-title { margin: 29px 5% 22px; font-size: clamp(30px, 8.2vw,42px); line-height: 1.05; overflow-wrap: anywhere; word-break: normal; }
   .game-layout { gap: 16px; }
   .game-aside { display: flex; flex-direction: column; gap: 18px; }
   .game-aside > .red-action { width: 100%; min-height: 56px; }
@@ -447,6 +463,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .game-description h3 { font-size: 24px; margin-bottom: 14px; }
   .game-description p { font-size: 16px; line-height: 1.5; }
   .game-screens { gap: 10px; }
+
   .section-switcher {
     display: grid;
     grid-template-columns: 1fr;
@@ -454,6 +471,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
     margin: 45px auto 55px !important;
     padding: 0 5%;
   }
+
   .section-switcher a {
     display: flex;
     justify-content: flex-start;
@@ -465,6 +483,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
     border-top: 1px solid #dedede;
     white-space: normal;
   }
+
   .section-switcher a:last-child { justify-content: space-between; border-bottom: 1px solid #dedede; }
   .nav-arrow { flex-shrink: 0; }
   .illustration-gallery { gap: 9px; }
@@ -477,12 +496,12 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .potion-row, .hunters-row { grid-template-columns: minmax(0,1fr); gap: 10px; padding: 0 3%; }
   .potion-row > .artwork-zoom, .potion-row > .artwork-zoom:last-child { aspect-ratio: auto; }
   .potion-row img { width: 100%; height: auto; object-fit: contain; }
-  .hunter-art span { font-size: clamp(15px,4vw,22px); }
   .cave-intro { display: flex; flex-direction: column; padding: 0; }
   .cave-intro .artwork-zoom { width: 100%; aspect-ratio: 673/580; }
   .cave-intro .concept-description { padding: 21px 5% 12px; }
   .house-variations { margin-top: 8px; }
 }
+
 @media (max-width: 359px) {
   .site-signature { font-size: 15px; }
   .hero-type h1 { font-size: 19vw; }
@@ -490,7 +509,10 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .hero-chat { font-size: 27px; }
   .contact-links a { font-size: 15px; }
 }
-@media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; transition: none !important; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
 
 /* Figma-inspired edge-to-edge red strokes, positioned to the wrapped text. */
 .home-grid, .game-layout { position: relative; }
@@ -510,6 +532,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .tools-icons { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; justify-items: center; }
   .tool-icon { width: 100%; height: auto; max-width: 64px; aspect-ratio: 1; }
 }
+
 @media (max-width: 540px) {
   .home-hero { height: auto; min-height: 0; }
   .artist-portrait { width: min(96%, 430px); height: clamp(265px,78vw,375px); margin: 6px auto 9px -1%; object-position: center bottom; }
@@ -520,10 +543,12 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   .tools-icons { grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(9px,3vw,16px); }
   .tool-icon { width: 100%; height: auto; max-width: 64px; aspect-ratio: 1; }
 }
+
 @media (max-width: 359px) {
   .hero-type h1 { font-size: 18.8vw; }
   .tool-icon { width: 100%; height: auto; max-width: 55px; aspect-ratio: 1; }
 }
+
 /* Give tool logos enough room in the two-column phone/tablet about layout. */
 @media (min-width: 461px) and (max-width: 760px) {
   .tools-icons { grid-template-columns: repeat(3,minmax(0,1fr)); }
@@ -538,26 +563,32 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
     column-gap: clamp(10px, 3vw, 23px);
     align-items: start;
   }
+
   .about-panel > h2, .about-panel > .about-name { grid-column: 1 / -1; }
   .about-copy { grid-column: 1; grid-row: 3; min-width: 0; }
+
   .tools-heading {
-    grid-column: 2; grid-row: 3;
+    grid-column: 2;
+    grid-row: 3;
     align-self: start;
     margin: 0;
     font-size: clamp(15px, 3.5vw, 22px);
   }
+
   .tools-icons {
-    grid-column: 2; grid-row: 3;
+    grid-column: 2;
+    grid-row: 3;
     align-self: start;
-    width: 100%; max-width: none;
+    width: 100%;
+    max-width: none;
     margin-top: clamp(29px, 6vw, 43px);
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(6px, 1.8vw, 13px);
     justify-items: center;
   }
+
   .tool-icon { width: 100%; height: auto; aspect-ratio: 1; max-width: 64px; object-fit: contain; }
 }
-
 
 /* Final alignment refinements — retain existing layouts, artwork and breakpoints. */
 .tool-icon-procreate-frame {
@@ -569,6 +600,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   overflow: hidden;
   justify-self: center;
 }
+
 /* Match Figma's source-image crop: the source contains large side margins. */
 .tool-icon-procreate-frame .tool-icon-procreate {
   position: absolute;
@@ -582,6 +614,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   object-fit: fill;
   aspect-ratio: auto;
 }
+
 /* Fixed icon column keeps all four contact labels aligned. */
 .contact-links a {
   display: grid;
@@ -591,6 +624,7 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   width: fit-content;
   max-width: 100%;
 }
+
 .contact-links svg {
   display: block;
   width: 100%;
@@ -598,24 +632,158 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   aspect-ratio: 1;
   place-self: center;
 }
+
 @media (min-width: 1101px) {
   /* Tool rows finish on the same baseline as the portfolio picture tiles. */
   .about-panel { display: flex; flex-direction: column; }
   .tools-heading { margin-top: auto; }
   .tools-icons { margin-top: 0; }
+
   /* The 3D blockout and the Walkthrough button share the same bottom edge. */
   .victorian-blockout { aspect-ratio: 819 / 664; }
   .victorian-blockout img { object-fit: cover; }
 }
+
 @media (max-width: 1100px) {
   .tool-icon-procreate-frame { max-width: 64px; }
 }
-@media (max-width: 760px) {
-  .contact-links a { grid-template-columns: 25px minmax(0,1fr); column-gap: 19px; }
-}
+
 @media (max-width: 540px) {
   .contact-links a { grid-template-columns: 23px minmax(0,1fr); column-gap: 12px; }
 }
+
 @media (max-width: 359px) {
   .tool-icon-procreate-frame { max-width: 55px; }
+}
+
+.artwork-static {
+  cursor: default;
+}
+
+.artwork-static:hover img {
+  filter: none;
+}
+
+/* Align title and PLAAAY button to the left edge */
+@media (min-width: 1101px) {
+  .game-content .project-title {
+    margin-left: 0;
+  }
+
+  .game-aside > .red-action {
+    margin-left: calc(-1 * min(4.16vw, 80px));
+    width: calc(100% + min(4.16vw, 80px));
+  }
+}
+
+@media (max-width: 760px) {
+  .contact-links a {
+    display: grid;
+    grid-template-columns: 25px minmax(0, 1fr);
+    column-gap: 19px;
+  }
+
+  .home-hero {
+    display: grid;
+    grid-template-columns: 54% 46%;
+    grid-template-rows: minmax(260px, 62vw) 74px;
+    padding-top: 70px;
+    height: auto;
+    min-height: 0;
+    align-items: center;
+  }
+
+  .artist-portrait {
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+    order: 0;
+    width: 115%;
+    max-width: none;
+    height: 100%;
+    top: auto;
+    left: -7%;
+    margin: 0;
+    object-fit: contain;
+    object-position: left bottom;
+  }
+
+  .hero-type {
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    order: 0;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    padding: 0 3% 0 0;
+    margin: 0;
+  }
+
+  .hero-type h1 {
+    font-size: clamp(34px, 10.5vw, 78px);
+    line-height: .95;
+    letter-spacing: -.065em;
+    white-space: nowrap;
+  }
+
+  .hero-type p {
+    font-size: clamp(10px, 2.3vw, 17px);
+    line-height: 1.2;
+    white-space: normal;
+    margin: 12px 0 0;
+  }
+
+  .hero-chat > span,
+  .hero-chat > svg,
+  .hero-chat::after,
+  .red-action > span,
+  .red-action > svg,
+  .red-action::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .mobile-nav:not([hidden]) {
+    animation: menuDrop 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: top center;
+  }
+
+  @keyframes menuDrop {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav:not([hidden]) {
+    animation: none;
+  }
+}
+
+}
+
+/* Latest artworks: preserve their actual proportions rather than cropping. */
+.potion-top { aspect-ratio: 640 / 268; }
+.potion-row { grid-template-columns: minmax(0,45fr) minmax(0,55fr); }
+.potion-row > .artwork-zoom { aspect-ratio: 640 / 374; }
+.potion-row > .artwork-zoom:last-child { aspect-ratio: 640 / 304; }
+.potion-top img, .potion-row img { object-fit: contain; }
+.hunters-row { grid-template-columns: repeat(3, minmax(0,1fr)); padding: 0; }
+.hunter-art .artwork-zoom { aspect-ratio: 640 / 398; }
+
+@media (max-width: 760px) {
+  .hunters-row { grid-template-columns: minmax(0,1fr); padding: 0 3%; }
+  .potion-row { grid-template-columns: minmax(0,1fr); }
+  .potion-row > .artwork-zoom,
+  .potion-row > .artwork-zoom:last-child { aspect-ratio: auto; }
 }
