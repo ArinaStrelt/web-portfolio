@@ -570,12 +570,7 @@ mark {
 }
 
 .cave-intro {
-  grid-template-columns: 35.1% 22.1%;
   align-items: start;
-}
-
-.cave-copy {
-  padding-top: var(--gap);
 }
 
 .house-variations {
@@ -650,6 +645,22 @@ mark {
   font-size: 24px;
 }
 
+.cave-intro {
+    grid-template-columns: 40% 60%;
+    gap: 20px;
+}
+
+.cave-intro .artwork-static img {
+    width: auto;
+    height: auto;
+    max-height: 800px;
+}
+
+.cave-copy {
+    padding: var(--gap) 0 0;
+    width: 50%;
+}
+
 /* Tablet */
 
 @media (max-width: 1100px) {
@@ -659,6 +670,22 @@ mark {
 }
 
 @media (max-width: 1000px) {
+  .cave-intro {
+    grid-template-columns: 60% 40%;
+    gap: 20px;
+  }
+
+  .cave-intro .artwork-static img {
+    width: 100%;
+    height: auto;
+  }
+
+  .cave-copy {
+    padding: var(--gap) 0 0;
+    width: 60%;
+  }
+
+
   .site-header {
     position: fixed;
     align-items: center;
@@ -837,6 +864,20 @@ mark {
     width: 115%;
     height: max(260px, 62vw);
     max-width: none;
+  }
+
+  .cave-intro {
+    grid-template-columns: 60% 40%;
+    gap: 0px;
+  }
+
+  .cave-intro .artwork-static img {
+    width: 100%;
+    height: auto;
+  }
+
+  .cave-copy {
+    width: 90%;
   }
 
   .hero-type {
