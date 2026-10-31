@@ -1,659 +1,523 @@
-/* styles.css */
 :root {
   --red: #c0383a;
-  --dark-red: #811919;
   --ink: #080808;
-  --paper: #fff;
-  --font: 'Outfit', 'Arial', sans-serif;
+  --gap: clamp(8px, .89vw, 17px);
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: white; color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; }
-body:has(.art-dialog[open]) { overflow: hidden; }
-a { color: inherit; }
-button { font: inherit; }
-a:focus-visible, button:focus-visible { outline: 3px solid #fa7d77; outline-offset: 5px; }
-img { display: block; max-width: 100%; }
-.skip-link { position: fixed; z-index: 500; left: 15px; top: -80px; padding: 12px 18px; color: white; background: var(--ink); }
-.skip-link:focus { top: 10px; }
-.page-frame { position: relative; width: 100%; max-width: 1920px; margin-inline: auto; overflow: hidden; }
-
-/* Header is deliberately modest, just like the original Figma typography. */
-.site-header { position: absolute; z-index: 20; left: 0; top: 0; width: 100%; height: 112px; display: flex; align-items: flex-start; justify-content: space-between; padding: 27px 4.16%; gap: 20px; color: var(--red); }
-.site-signature { flex: 0 0 auto; text-decoration: none; font-size: clamp(14px, 1.67vw, 32px); line-height: 1.2; font-weight: 300; letter-spacing: -.015em; }
-.header-email { text-decoration: none; font-size: clamp(11px, 1.04vw, 20px); line-height: 1.4; font-weight: 300; color: var(--dark-red); white-space: nowrap; margin-top: 1px; }
-.header-email:hover, .site-signature:hover { text-decoration: underline; text-underline-offset: 5px; }
-.desktop-nav { display: flex; align-items: center; gap: clamp(12px,1.25vw,28px); padding-top: 6px; }
-.desktop-nav a { font-size: clamp(10px,.83vw,15px); font-weight: 500; text-decoration: none; text-transform: uppercase; white-space: nowrap; letter-spacing: .035em; opacity: .68; transition: opacity .2s; }
-.desktop-nav a:hover, .desktop-nav a[aria-current="page"] { opacity: 1; text-decoration: underline; text-underline-offset: 6px; }
-.header-on-image { color: white; }
-.header-on-image .header-email { color: white; }
-.menu-toggle, .mobile-nav { display: none; }
-
-/* Landing: very large typographic cover and painted portrait. */
-.home-hero { position: relative; height: min(56.25vw, 1080px); min-height: 510px; overflow: hidden; background: white; }
-.artist-portrait { position: absolute; width: 43.86%; height: 87.22%; left: 2.60%; top: 10%; object-fit: contain; object-position: bottom left; }
-.hero-type { position: absolute; left: 41.77%; top: 10.75%; width: 61.9%; }
-.hero-type h1 { margin: 0; font-size: clamp(75px,15.68vw,301px); font-weight: 700; letter-spacing: -.04em; line-height: 1.005; white-space: nowrap; }
-.hero-type h1 span { display: block; }
-.hero-type p { margin: .12em 0 0 .10em; font-size: clamp(16px, 2.08vw, 40px); line-height: 1.2; letter-spacing: -.02em; white-space: nowrap; }
-.hero-chat { position: absolute; left: 42.80%; top: 75.9%; width: 68.5%; height: 12.6%; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 2%; text-decoration: none; font-weight: 700; font-size: clamp(23px, 3.33vw, 64px); transition: background .2s; }
-.hero-chat span { padding-right: 15%; opacity: 0; transition: opacity .2s, transform .2s; transform: translate(-12px, 12px); }
-.hero-chat:hover { background: #a82a2c; }
-.hero-chat:hover span { opacity: 1; transform: translate(0,0); }
-
-.home-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(8px, 1.05vw, 20px); padding: min(2.44vw,47px) 4.166% min(4.55vw,87px); }
-.about-panel { min-width: 0; margin-top: -28px; }
-.about-panel h2 { font-size: clamp(38px,6.61vw,127px); font-weight: 700; letter-spacing: -.075em; margin: 0; line-height: 1.13; white-space: nowrap; }
-.about-name { text-align: right; font-size: clamp(15px,2.08vw,40px); margin: -.04em 0 min(1.9vw,36px); line-height: 1.25; }
-.about-copy h3 { margin: 0 0 min(1.56vw,30px); font-weight: 700; font-size: clamp(16px,1.67vw,32px); line-height: 1.3; }
-.about-copy p { font-size: clamp(14px, 1.25vw, 24px); font-weight: 400; line-height: 1.36; margin: 0 0 min(1.58vw,30px); }
-.about-copy mark { color: white; background: var(--red); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-.tools-heading { font-size: clamp(17px,1.67vw,32px); margin: min(3vw,55px) 0 min(.67vw,13px); }
-.tools-icons { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(8px,1vw,18px); max-width: 100%; align-items: center; justify-items: center; }
-.tool-icon { width: 100%; height: auto; max-width: 78px; max-height: none; object-fit: contain; aspect-ratio: 1; }
-.category-tile { display: block; position: relative; height: min(51.4vw,987px); overflow: hidden; color: white; background: #9a9a9a; text-decoration: none; isolation: isolate; }
-.category-image { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: center center; transition: transform .5s cubic-bezier(.2,.7,.1,1); z-index: -2; }
-.tile-game .category-image { object-position: 49% 45%; }
-.tile-illustration .category-image { object-position: 55% center; }
-.tile-concepts .category-image { object-position: center center; }
-.category-tile::after { content: ''; position: absolute; inset: 55% 0 0; z-index: -1; background: linear-gradient(transparent, rgba(0,0,0,.42)); }
-.category-tile:hover .category-image, .category-tile:focus-visible .category-image { transform: scale(1.045); }
-.tile-number { position: absolute; top: -5%; left: -2%; font-size: clamp(120px,15.625vw,300px); line-height: .93; font-weight: 700; letter-spacing: -.09em; }
-.tile-bottom { position: absolute; bottom: 2.7%; left: 0; right: 0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: min(.7vw,12px); }
-.tile-bottom strong { font-size: clamp(17px,2.5vw,48px); font-weight: 700; line-height: 1; white-space: nowrap; }
-.tile-bottom small { font-size: clamp(9px,1.04vw,20px); font-weight: 400; line-height: 1.2; white-space: nowrap; }
-
-/* Shared red contact section. */
-.contact-footer { background: var(--red); color: #fff; padding: min(2.25vw,43px) 4.16% min(3.3vw,64px); min-height: min(25.2vw,484px); }
-.contact-wrap h2 { font-size: clamp(44px,5vw,96px); font-weight: 700; line-height: 1.18; letter-spacing: -.035em; margin: 0 0 min(.5vw,10px); }
-.contact-links { display: grid; gap: min(.36vw,7px); }
-.contact-links a { display: flex; width: fit-content; align-items: center; gap: min(2.4vw,46px); color: #fff; font-size: clamp(19px,3.33vw,64px); line-height: 1.18; font-weight: 400; text-underline-offset: .09em; }
-.contact-links a { text-decoration: none; }
-.contact-links a:hover span { opacity: .82; }
-.contact-links svg { flex-shrink: 0; width: clamp(22px,2.55vw,49px); height: clamp(22px,2.55vw,49px); stroke-width: 1.5; }
-
-/* Work pages: full-bleed cover / same exact visual system. */
-.work-hero { position: relative; height: min(56.25vw,1080px); min-height: 400px; overflow: hidden; background: #4b544e; color: #fff; }
-body[data-route="illustrations"] .work-hero, body[data-route="concepts"] .work-hero { height: min(58.18vw,1118px); }
-.work-hero-image { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.work-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,.22),transparent 74%); pointer-events: none; }
-.work-hero-titles { z-index: 1; position: absolute; top: 34.8%; left: 4.16%; right: 4.16%; }
-.work-hero-titles p { margin: 0; font-size: clamp(23px,3.33vw,64px); font-weight: 400; line-height: 1.13; letter-spacing: -.025em; }
-.work-hero-titles h1 { margin: 0; font-size: clamp(38px,5vw,96px); font-weight: 700; line-height: 1.13; letter-spacing: -.025em; white-space: nowrap; }
-
-/* Game art: asymmetric editorial two-column layout. */
-.game-content { padding: min(2.6vw,50px) 0 0; }
-.project-title { color: var(--red); margin: 0 4.16% min(1.8vw,34px); font-size: clamp(33px,3.82vw,73px); line-height: 1.18; font-weight: 700; letter-spacing: -.027em; text-transform: uppercase; }
-.game-layout { position: relative; display: grid; grid-template-columns: 30.5% minmax(0,1fr); gap: min(.9vw,17px); padding-left: 4.16%; align-items: start; }
-.game-aside { position: relative; min-width: 0; }
-.red-action { display: inline-flex; align-items: center; justify-content: space-between; gap: 25px; padding: min(.94vw,18px) min(1.56vw,30px); min-height: min(4.48vw,86px); background: var(--red); color: #fff; border: 0; text-decoration: none; cursor: pointer; font-weight: 700; font-size: clamp(19px,2.08vw,40px); line-height: 1.13; transition: background .2s; }
-.red-action:hover { background: #a32b2d; }
-.red-action span { opacity: 0; transition: opacity .15s; }
-.red-action:hover span { opacity: 1; }
-.game-aside > .red-action { width: 100%; }
-.game-small-images { display: grid; gap: min(1.65vw,32px); width: 75%; margin: min(2.75vw,53px) 0 min(1.65vw,32px) auto; }
-.artwork-zoom { display: block; border: 0; padding: 0; margin: 0; background: #cfcfcf; width: 100%; overflow: hidden; cursor: zoom-in; position: relative; }
-.artwork-zoom img { display: block; width: 100%; height: 100%; object-fit: cover; transition: filter .2s; }
-.artwork-zoom:hover img { filter: brightness(.95); }
-.game-small-images .artwork-zoom { aspect-ratio: 425/255; }
-.game-description { margin: min(2vw,38px) 0 0 auto; width: 75%; }
-.game-description h3, .concept-description h2 { font-size: clamp(20px,1.66vw,32px); line-height: 1.2; margin: 0 0 min(1.35vw,26px); font-weight: 700; }
-.game-description p, .concept-description p { font-size: clamp(15px,1.25vw,24px); line-height: 1.36; margin: 0 0 min(1.1vw,22px); }
-.game-description mark { background: var(--red); color: white; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-.game-screens { display: grid; gap: min(.7vw,13px); min-width: 0; }
-.game-screens .artwork-zoom:first-child { aspect-ratio: 1248/681; }
-.game-screens .artwork-zoom:nth-child(2) { aspect-ratio: 1248/629; }
-.game-hand { position: absolute; width: 9.32%; height: auto; left: 5%; top: 3.5vw; pointer-events: none; transform-origin: 50% 0; transform: rotate(25.82deg); z-index: 3; }
-
-.section-switcher { display: flex; justify-content: space-between; align-items: center; gap: 28px; padding: 0 12.25%; margin: min(8.3vw,160px) auto min(7.1vw,136px); }
-.section-switcher a { display: flex; align-items: center; gap: min(2.6vw,50px); text-decoration: none; font-size: clamp(21px,3.33vw,64px); line-height: 1.25; white-space: nowrap; transition: color .2s; }
-.section-switcher a:hover { color: var(--red); }
-.nav-arrow { font-family: Arial, sans-serif; font-weight: 200; font-size: 1.15em; line-height: .7; }
-
-/* Illustrations: four uninterrupted edge-to-edge paintings. */
-.illustration-gallery { display: grid; gap: min(.89vw,17px); padding-top: min(.89vw,17px); }
-.illustration-panel { display: block; width: 100%; }
-.illustration-city { aspect-ratio: 1920/936; }
-.illustration-birch { aspect-ratio: 1920/754; }
-.illustration-snow { aspect-ratio: 1920/1085; }
-.illustration-panel img { object-fit: cover; }
-body[data-route="illustrations"] .section-switcher { margin-top: min(8.3vw,160px); margin-bottom: min(7.1vw,136px); }
-
-/* Concept art: alternating full-width work and process sheets. */
-.concept-gallery { padding-top: min(.89vw,17px); }
-.wide-art { width: 100%; }
-.victorian-scene { aspect-ratio: 1920/1053; }
-.victorian-study { margin-top: min(.89vw,17px); display: grid; grid-template-columns: 29.17% 42.65% 22.08%; gap: .9%; padding-right: 0; align-items: start; }
-.sketch-stack { display: grid; gap: min(.88vw,17px); }
-.sketch-stack .artwork-zoom { aspect-ratio: 560/297; }
-.victorian-blockout { aspect-ratio: 819/607; }
-.concept-description { padding: 0 min(.6vw,12px); }
-.concept-description .red-action { width: 100%; justify-content: flex-start; margin-top: min(1.1vw,21px); font-size: clamp(15px,1.9vw,38px); white-space: nowrap; }
-.art-separator { height: min(.89vw,17px); margin: min(.89vw,17px) 0; background: #d9d9d9; }
-.potion-top { aspect-ratio: 1921/568; }
-.potion-row { display: grid; grid-template-columns: 45% 55%; gap: min(.89vw,17px); margin-top: min(.89vw,17px); }
-.potion-row > .artwork-zoom { aspect-ratio: 865/393; }
-.potion-row > .artwork-zoom:last-child { aspect-ratio: 1038/393; }
-.hunters-row { display: grid; grid-template-columns: 1fr 1fr; gap: min(.74vw,14px); padding: 0; }
-.hunter-art { position: relative; min-width: 0; }
-.hunter-art .artwork-zoom { aspect-ratio: 908/564; }
-.cave-intro { display: grid; grid-template-columns: 35.1% 22.1% minmax(0,1fr); gap: 0; min-height: min(49.45vw,949px); align-items: start; }
-.cave-intro .artwork-zoom { aspect-ratio: 673/949; background: white; }
-.cave-intro .artwork-zoom img { object-fit: cover; object-position: left center; }
-.cave-copy { padding: min(1.6vw,31px) 0 0; }
-.house-variations { aspect-ratio: 1932/746; margin-top: min(.9vw,17px); }
-body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); margin-bottom: min(7.1vw,136px); }
-
-/* Enlarged artwork: image is never modified or redrawn. */
-.art-dialog { border: none; padding: 32px 32px 18px; width: min(95vw,1600px); max-width: none; max-height: 94vh; background: transparent; color: white; box-shadow: none; }
-.art-dialog::backdrop { background: rgba(0,0,0,0.9); }
-.dialog-close { border: 0; position: absolute; right: 12px; top: 4px; width: 45px; height: 45px; font-size: 35px; line-height: 1; color: white; background: transparent; cursor: pointer; z-index: 1; }
-.dialog-figure { margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.dialog-figure img { display: block; max-height: calc(94vh - 95px); max-width: 100%; width: auto; height: auto; object-fit: contain; }
-.dialog-figure figcaption { padding: 12px 0 0; font-size: 24px; text-align: center; opacity: .85; }
-
-@media (min-width: 1921px) {
-  .home-hero, .work-hero, body[data-route="illustrations"] .work-hero, body[data-route="concepts"] .work-hero { min-height: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (max-width: 1100px) {
-  .desktop-nav { gap: 12px; }
-  .header-email { display: none; }
-  .about-panel { margin-top: -8px; }
-  .about-copy p { font-size: max(12px,1.25vw); }
-  .about-copy h3 { font-size: max(14px,1.67vw); }
-  .tools-heading { margin-top: 24px; }
-  .category-tile { min-height: 490px; }
-  .section-switcher { padding-inline: 7%; }
+html {
+  scroll-behavior: smooth;
 }
 
-@media (max-width: 760px) {
-  .site-header { height: 72px; padding: 20px 5%; align-items: flex-start; }
-  .site-signature { font-size: 17px; }
-  .desktop-nav, .header-email { display: none; }
-  .menu-toggle { width: 37px; height: 32px; display: flex; background: rgba(255,255,255,.1); border: 0; padding: 5px; margin-top: -3px; flex-direction: column; gap: 5px; justify-content: center; cursor: pointer; color: currentColor; }
-  .menu-toggle span { display: block; background: currentColor; width: 100%; height: 2px; }
-  .mobile-nav:not([hidden]) { display: flex; position: absolute; z-index: 22; top: 64px; right: 4%; min-width: min(270px,90vw); flex-direction: column; gap: 3px; background: #fff; box-shadow: 0 14px 32px #0003; padding: 16px; }
-  .mobile-nav a { color: var(--ink); text-decoration: none; font-size: 18px; padding: 8px 10px; }
-  .mobile-nav a[aria-current="page"] { color: var(--red); font-weight: 700; }
-  .home-hero { min-height: 690px; height: 690px; }
-  .artist-portrait { left: -10%; top: 65px; height: 500px; width: 86%; object-position: top left; }
-  .hero-type { top: 295px; left: 4%; width: 96%; z-index: 1; }
-  .hero-type h1 { font-size: clamp(90px,19.7vw,150px); letter-spacing: -.055em; line-height: .99; text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff; }
-  .hero-type p { font-size: clamp(14px,4vw,26px); margin-top: 14px; }
-  .hero-chat { left: 0; top: auto; bottom: 0; width: 100%; height: 75px; padding-left: 5%; font-size: 32px; z-index: 2; }
-  .home-grid { padding: 32px 5% 48px; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .about-panel { grid-column: 1 / -1; margin: 0 0 15px; display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); column-gap: 20px; }
-  .about-panel h2 { font-size: clamp(70px,13vw,110px); grid-column: 1 / -1; line-height: 1; }
-  .about-name { grid-column: 1 / -1; font-size: 27px; margin: 0 0 20px; }
-  .about-copy h3 { font-size: clamp(18px,3.6vw,26px); }
-  .about-copy p { font-size: 16px; margin-bottom: 18px; }
-  .tools-heading { grid-column: 2; grid-row: 3; margin-top: 0; font-size: 22px; }
-  .tools-icons { grid-column: 2; grid-row: 3; align-self: start; margin-top: 36px; grid-template-columns: repeat(3,1fr); gap: 12px; }
-  .category-tile { min-height: 0; height: 67vw; }
-  .category-tile:last-child { grid-column: 1 / -1; height: 80vw; }
-  .tile-number { font-size: clamp(125px,28vw,220px); }
-  .tile-bottom strong { font-size: clamp(20px,4.1vw,34px); }
-  .tile-bottom small { font-size: clamp(10px,2vw,15px); }
-  .contact-footer { min-height: 290px; padding: 28px 5% 45px; }
-  .contact-wrap h2 { font-size: clamp(45px,10vw,74px); margin-bottom: 13px; }
-  .contact-links { gap: 11px; }
-  .contact-links a { font-size: clamp(19px,4vw,30px); gap: 19px; }
-  .contact-links svg { width: 25px; height: 25px; }
-  .work-hero, body[data-route="illustrations"] .work-hero, body[data-route="concepts"] .work-hero { min-height: 350px; height: 68vw; }
-  .work-hero-titles { left: 5%; top: 37%; }
-  .work-hero-titles p { font-size: clamp(21px,4vw,34px); }
-  .work-hero-titles h1 { font-size: clamp(39px,7vw,63px); }
-  .project-title { font-size: clamp(31px,6vw,56px); margin: 25px 5% 20px; }
-  .game-layout { display: flex; flex-direction: column; padding: 0 5%; gap: 18px; }
-  .game-aside { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; }
-  .game-aside > .red-action { grid-column: 1 / -1; min-height: 56px; font-size: 25px; padding: 12px 16px; }
-  .game-small-images { grid-column: 1; width: 100%; margin: 0; gap: 12px; }
-  .game-description { grid-column: 2; width: 100%; margin: 0; }
-  .game-description h3 { font-size: 21px; margin-bottom: 16px; }
-  .game-description p { font-size: 14px; margin-bottom: 13px; }
-  .game-screens { width: 100%; }
-  .game-hand { display: none; }
-  .section-switcher { margin: 55px auto 65px !important; padding: 0 5%; }
-  .section-switcher a { font-size: clamp(15px,3vw,26px); gap: 10px; }
-  .illustration-gallery { gap: 8px; padding-top: 8px; }
-  .concept-gallery { padding-top: 9px; }
-  .victorian-study { grid-template-columns: 1fr 1.4fr; gap: 10px; padding-right: 5%; }
-  .sketch-stack { gap: 10px; }
-  .concept-description { grid-column: 1 / -1; padding: 8px 5% 15px; }
-  .concept-description h2 { font-size: 26px; }
-  .concept-description p { font-size: 16px; }
-  .concept-description .red-action { width: auto; font-size: 22px; padding: 14px 20px; }
-  .art-separator { height: 8px; margin: 9px 0; }
-  .potion-row { gap: 8px; margin-top: 8px; }
-  .hunters-row { padding: 0 2%; gap: 8px; }
-
-  .cave-intro { grid-template-columns: 1fr 1fr; min-height: auto; gap: 0; padding-right: 4%; }
-  .cave-intro .concept-description { grid-column: 2; padding: 6px 0 0 10px; }
-  .cave-copy h2 { font-size: 23px; }
-  .cave-copy p { font-size: 14px; }
-  .house-variations { margin-top: 10px; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #fff;
+  font-family: Outfit, Arial, sans-serif;
 }
 
-@media (max-width: 460px) {
-  .home-hero { min-height: 620px; height: 620px; }
-  .artist-portrait { width: 100%; left: -12%; top: 60px; height: 410px; }
-  .hero-type { top: 305px; }
-  .hero-type h1 { font-size: 20vw; }
-  .hero-type p { margin-top: 16px; font-size: 4vw; }
-  .hero-chat { height: 70px; }
-  .home-grid { grid-template-columns: 1fr; }
-  .about-panel { grid-column: 1; grid-template-columns: 1fr; }
-  .about-name { grid-column: 1; margin-bottom: 20px; }
-  .tools-heading, .tools-icons { grid-column: 1; grid-row: auto; }
-  .tools-heading { margin-top: 10px; }
-  .tools-icons { margin-top: 0; grid-template-columns: repeat(4,1fr); max-width: 300px; }
-  .category-tile, .category-tile:last-child { grid-column: 1; height: 120vw; max-height: 510px; }
-  .tile-bottom strong { font-size: 34px; }
-  .tile-bottom small { font-size: 13px; }
-  .work-hero, body[data-route="illustrations"] .work-hero, body[data-route="concepts"] .work-hero { height: 330px; min-height: 330px; }
-  .work-hero-titles h1 { font-size: 10vw; }
-  .work-hero-titles p { font-size: 5vw; }
-  .game-aside { grid-template-columns: 1fr; }
-  .game-aside > .red-action, .game-small-images, .game-description { grid-column: 1; }
-  .game-small-images { display: grid; grid-template-columns: 1fr 1fr; }
-  .game-description h3 { font-size: 22px; }
-  .game-description p { font-size: 16px; }
-  .section-switcher { gap: 14px; }
-  .section-switcher a { font-size: 13px; gap: 6px; }
-  .victorian-study { padding-right: 0; grid-template-columns: 1fr 1fr; }
-  .victorian-study .concept-description { padding: 12px 5%; }
-  .concept-description h2 { font-size: 23px; }
-  .cave-intro { display: flex; flex-direction: column; padding-right: 0; }
-  .cave-intro .artwork-zoom { width: 100%; aspect-ratio: 673/560; }
-  .cave-intro .concept-description { padding: 15px 5%; }
-  .contact-links a { font-size: clamp(16px,4.3vw,21px); gap: 12px; }
-  .contact-links svg { width: 21px; height: 21px; }
-  .art-dialog { padding: 36px 12px 12px; }
-}
-
-/* Artwork navigation works with touch or mouse. */
-.dialog-controls { display: none !important; }
-.dialog-controls[hidden] { display: none; }
-.dialog-step { border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.07); color: #fff; font-size: 23px; cursor: pointer; width: 52px; height: 44px; }
-.dialog-step:hover { background: rgba(255,255,255,.2); }
-.dialog-figure img { touch-action: pan-y pinch-zoom; }
-
-/* Tablet layouts should not squeeze four portfolio columns into the screen. */
-@media (min-width: 761px) and (max-width: 1000px) {
-  .home-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; padding: 38px 5% 62px; }
-  .about-panel { grid-column: 1 / -1; margin: 0 0 20px; }
-  .about-panel h2 { font-size: 90px; }
-  .about-name { font-size: 29px; margin: -7px 0 22px; text-align: left; }
-  .about-copy { max-width: 650px; }
-  .about-copy h3 { font-size: 26px; }
-  .about-copy p { font-size: 19px; margin-bottom: 16px; }
-  .tools-heading { margin-top: 26px; font-size: 26px; }
-  .tools-icons { grid-template-columns: repeat(7, minmax(0,1fr)); max-width: 570px; gap: 14px; }
-  .tool-icon { width: 100%; height: auto; max-width: 64px; aspect-ratio: 1; }
-  .category-tile { height: 65vw; min-height: 0; }
-  .category-tile:last-child { grid-column: 1 / -1; height: 58vw; }
-  .tile-number { font-size: clamp(160px,25vw,220px); }
-  .tile-bottom strong { font-size: 34px; }
-  .tile-bottom small { font-size: 14px; }
-  .game-layout { display: flex; flex-direction: column; padding: 0 5%; gap: 22px; }
-  .game-aside { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; }
-  .game-aside > .red-action { grid-column: 1 / -1; width: 100%; min-height: 58px; padding: 12px 20px; }
-  .game-small-images { grid-column: 1; width: 100%; margin: 0; gap: 12px; }
-  .game-description { grid-column: 2; width: 100%; margin: 0; }
-  .game-description h3 { font-size: 26px; }
-  .game-description p { font-size: 17px; }
-  .game-hand { display: none; }
-  .game-screens { width: 100%; }
-  .victorian-study { grid-template-columns: 1fr 1.4fr; gap: 13px; padding: 0 3%; }
-  .concept-description { grid-column: 1 / -1; padding: 14px 2%; }
-  .concept-description h2 { font-size: 29px; }
-  .concept-description p { font-size: 19px; }
-  .concept-description .red-action { width: auto; min-height: 60px; font-size: 23px; }
-  .cave-intro { grid-template-columns: 1fr 1fr; min-height: 0; }
-  .cave-copy { grid-column: 2; padding: 18px 4%; }
-  .section-switcher { padding-inline: 6%; }
-}
-
-@media (max-width: 1000px) {
-  .site-header, .header-on-image { position: fixed; top: 0; left: 0; right: 0; height: 66px; padding: 10px 5%; display: flex; align-items: center; color: var(--red); background: rgba(255,255,255,.97); box-shadow: 0 2px 18px rgba(0,0,0,.055); border-bottom: 1px solid rgba(0,0,0,.075); z-index: 100; }
-  .site-signature { min-height: 44px; display: flex; align-items: center; font-size: clamp(16px,2.5vw,21px); }
-  .desktop-nav, .header-email { display: none; }
-  .menu-toggle { display: flex; flex: 0 0 44px; width: 44px; height: 44px; margin: 0; padding: 11px 8px; justify-content: center; gap: 5px; background: transparent; border: 0; flex-direction: column; cursor: pointer; color: var(--red); }
-  .menu-toggle span { height: 2px; width: 100%; background: currentColor; transition: transform .2s, opacity .2s; }
-  .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(7px) rotate(45deg); }
-  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-  .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-7px) rotate(-45deg); }
-  .mobile-nav:not([hidden]) { display: flex; position: fixed; z-index: 99; top: 65px; left: 0; right: 0; flex-direction: column; gap: 0; width: 100%; min-width: 0; max-height: calc(100dvh - 65px); overflow-y: auto; padding: 10px 5% 18px; background: rgba(255,255,255,.99); box-shadow: 0 16px 30px rgba(0,0,0,.13); }
-  .mobile-nav a { display: flex; align-items: center; color: var(--ink); text-decoration: none; min-height: 50px; padding: 11px 8px; border-bottom: 1px solid #ededed; font-size: 18px; font-weight: 500; }
-  .mobile-nav a[aria-current="page"] { color: var(--red); font-weight: 700; }
-  .work-hero::after { background: linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.22) 46%,rgba(0,0,0,.08) 100%); }
-}
-
-/* Mobile-first refinements. Figma artwork stays intact; only the layout adapts. */
-@media (max-width: 760px) {
-  html { scroll-padding-top: 80px; }
-
-  .site-header, .header-on-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 66px;
-    padding: 10px 5%;
-    display: flex;
-    align-items: center;
-    color: var(--red);
-    background: rgba(255, 255, 255, .97);
-    border-bottom: 1px solid rgba(0,0,0,.075);
-    box-shadow: 0 2px 18px rgba(0,0,0,.055);
-    z-index: 100;
-  }
-
-  .header-on-image .site-signature { color: var(--red); }
-  .site-signature { font-size: clamp(16px, 3.1vw, 22px); }
-
-  .menu-toggle {
-    display: flex;
-    flex: 0 0 44px;
-    width: 44px;
-    height: 44px;
-    margin: 0;
-    padding: 11px 8px;
-    justify-content: center;
-    gap: 5px;
-    border-radius: 0;
-    background: transparent;
-    touch-action: manipulation;
-  }
-
-  .menu-toggle span { height: 2px; width: 100%; transition: transform .2s, opacity .2s; }
-  .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(7px) rotate(45deg); }
-  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-  .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-7px) rotate(-45deg); }
-
-  .mobile-nav:not([hidden]) {
-    position: fixed;
-    top: 65px;
-    right: 0;
-    left: 0;
-    width: 100%;
-    min-width: 0;
-    max-height: calc(100dvh - 65px);
-    padding: 10px 5% 18px;
-    overflow-y: auto;
-    background: rgba(255,255,255,.99);
-    box-shadow: 0 16px 30px rgba(0,0,0,.13);
-    z-index: 99;
-  }
-
-  .mobile-nav a {
-    display: flex;
-    align-items: center;
-    min-height: 50px;
-    padding: 11px 8px;
-    border-bottom: 1px solid #ededed;
-    font-size: 18px;
-    font-weight: 500;
-    touch-action: manipulation;
-  }
-
-  .hero-chat span, .red-action span { opacity: 1; transform: none; padding-right: 0; }
-  .category-tile { touch-action: manipulation; }
-  .about-copy { min-width: 0; }
-  .contact-links a { min-width: 0; min-height: 42px; }
-  .contact-links span { min-width: 0; overflow-wrap: anywhere; }
-  .work-hero { isolation: isolate; }
-  .work-hero-titles { right: 5%; }
-  .work-hero-titles h1 { white-space: normal; }
-  .section-switcher a { min-height: 48px; touch-action: manipulation; }
-  .artwork-zoom { touch-action: manipulation; }
-
-  .art-dialog {
-    width: 100vw;
-    max-width: 100vw;
-    max-height: 100dvh;
-    padding: 58px 12px 16px;
-    margin: auto;
-  }
-
-  .dialog-close { top: 5px; right: 8px; width: 48px; height: 48px; }
-  .dialog-figure img { max-height: calc(100dvh - 130px); }
-}
-
-@media (max-width: 540px) {
-  .home-hero { height: 620px; min-height: 620px; }
-  .artist-portrait { left: -8%; top: 55px; width: 102%; height: 415px; object-position: left top; }
-  .hero-type { top: 300px; left: 5%; width: 93%; }
-  .hero-type h1 { font-size: clamp(62px, 19.2vw, 99px); line-height: 1; letter-spacing: -.053em; }
-  .hero-type p { white-space: normal; font-size: clamp(14px,3.9vw,20px); margin-top: 13px; }
-  .hero-chat { bottom: 0; height: 74px; font-size: 30px; padding-inline: 5%; }
-  .home-grid { padding: 38px 5% 46px; gap: 14px; }
-  .about-panel { margin: 0 0 18px; }
-  .about-panel h2 { font-size: clamp(68px, 17vw, 94px); }
-  .about-name { font-size: 24px; margin-bottom: 23px; }
-  .about-copy h3 { font-size: 21px; line-height: 1.25; }
-  .about-copy p { font-size: 16px; line-height: 1.5; }
-  .tools-heading { font-size: 24px; margin: 14px 0 5px; }
-  .tools-icons { grid-template-columns: repeat(4, 1fr); max-width: 350px; gap: 14px; margin-top: 0; }
-  .tool-icon { width: 100%; height: auto; max-width: 64px; aspect-ratio: 1; }
-  .category-tile, .category-tile:last-child { width: 100%; height: min(118vw,500px); max-height: none; }
-  .tile-number { font-size: clamp(128px,40vw,196px); left: -1%; top: -4%; }
-  .tile-bottom { bottom: 6%; gap: 7px; padding-inline: 6px; }
-  .tile-bottom strong { font-size: clamp(27px,8vw,40px); }
-  .tile-bottom small { font-size: clamp(10px,3.2vw,14px); white-space: normal; }
-  .contact-footer { min-height: 0; padding: 33px 5% 42px; }
-  .contact-wrap h2 { font-size: clamp(42px, 10vw, 56px); }
-  .contact-links { gap: 6px; }
-  .contact-links a { font-size: clamp(15px,4.4vw,21px); gap: 12px; line-height: 1.3; }
-  .contact-links svg { flex: 0 0 23px; width: 23px; height: 23px; }
-  .work-hero, body[data-route="illustrations"] .work-hero, body[data-route="concepts"] .work-hero { height: 420px; min-height: 420px; }
-  .work-hero-image { object-position: center; }
-  .work-hero-titles { top: auto; bottom: 16%; left: 5%; }
-  .work-hero-titles p { font-size: clamp(21px,5.1vw,27px); }
-  .work-hero-titles h1 { font-size: clamp(30px, 8.4vw,45px); line-height: 1.08; }
-  .project-title { margin: 29px 5% 22px; font-size: clamp(30px, 8.2vw,42px); line-height: 1.05; overflow-wrap: anywhere; word-break: normal; }
-  .game-layout { gap: 16px; }
-  .game-aside { display: flex; flex-direction: column; gap: 18px; }
-  .game-aside > .red-action { width: 100%; min-height: 56px; }
-  .game-small-images { width: 100%; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
-  .game-description { margin: 0; width: 100%; }
-  .game-description h3 { font-size: 24px; margin-bottom: 14px; }
-  .game-description p { font-size: 16px; line-height: 1.5; }
-  .game-screens { gap: 10px; }
-
-  .section-switcher {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin: 45px auto 55px !important;
-    padding: 0 5%;
-  }
-
-  .section-switcher a {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 14px;
-    min-height: 62px;
-    padding: 11px 0;
-    font-size: clamp(18px,5.4vw,24px);
-    border-top: 1px solid #dedede;
-    white-space: normal;
-  }
-
-  .section-switcher a:last-child { justify-content: space-between; border-bottom: 1px solid #dedede; }
-  .nav-arrow { flex-shrink: 0; }
-  .illustration-gallery { gap: 9px; }
-  .victorian-study { grid-template-columns: minmax(0, 1fr) minmax(0,1.3fr); gap: 8px; padding: 0 3%; }
-  .sketch-stack { gap: 8px; }
-  .victorian-study .concept-description { padding: 22px 2% 14px; }
-  .concept-description h2 { font-size: 25px; }
-  .concept-description p { font-size: 16px; line-height: 1.5; }
-  .concept-description .red-action { font-size: 19px; width: 100%; min-height: 52px; }
-  .potion-row, .hunters-row { grid-template-columns: minmax(0,1fr); gap: 10px; padding: 0 3%; }
-  .potion-row > .artwork-zoom, .potion-row > .artwork-zoom:last-child { aspect-ratio: auto; }
-  .potion-row img { width: 100%; height: auto; object-fit: contain; }
-  .cave-intro { display: flex; flex-direction: column; padding: 0; }
-  .cave-intro .artwork-zoom { width: 100%; aspect-ratio: 673/580; }
-  .cave-intro .concept-description { padding: 21px 5% 12px; }
-  .house-variations { margin-top: 8px; }
-}
-
-@media (max-width: 359px) {
-  .site-signature { font-size: 15px; }
-  .hero-type h1 { font-size: 19vw; }
-  .hero-type p { font-size: 13px; }
-  .hero-chat { font-size: 27px; }
-  .contact-links a { font-size: 15px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
-}
-
-/* Figma-inspired edge-to-edge red strokes, positioned to the wrapped text. */
-.home-grid, .game-layout { position: relative; }
-.highlight-extensions { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.highlight-extension { position: absolute; display: block; background: var(--red); }
-.about-panel, .game-aside { position: relative; z-index: 1; }
-.highlight-paragraph mark { background: var(--red); color: #fff; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-
-@media (max-width: 760px) {
-  /* Place the full title BELOW the portrait: no lettering covers the face. */
-  .home-hero { display: flex; flex-direction: column; height: auto; min-height: 0; padding-top: 66px; overflow: hidden; }
-  .artist-portrait { position: relative; flex: none; order: 0; top: auto; left: auto; width: min(82%, 470px); height: clamp(320px, 60vw, 460px); margin: 8px auto 5px; object-fit: contain; object-position: center bottom; }
-  .hero-type { position: relative; flex: none; order: 1; top: auto; left: auto; right: auto; width: 100%; padding: 0 5%; margin: 0; z-index: 1; }
-  .hero-type h1 { font-size: clamp(72px,17.5vw,129px); line-height: .9; letter-spacing: -.06em; text-shadow: none; }
-  .hero-type p { font-size: clamp(17px,3.5vw,25px); margin: 17px 0 28px; }
-  .hero-chat { position: relative; flex: 0 0 76px; order: 2; left: 0; top: auto; bottom: auto; width: 100%; height: 76px; }
-  .tools-icons { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; justify-items: center; }
-  .tool-icon { width: 100%; height: auto; max-width: 64px; aspect-ratio: 1; }
-}
-
-@media (max-width: 540px) {
-  .home-hero { height: auto; min-height: 0; }
-  .artist-portrait { width: min(96%, 430px); height: clamp(265px,78vw,375px); margin: 6px auto 9px -1%; object-position: center bottom; }
-  .hero-type { top: auto; left: auto; width: 100%; padding: 0 5%; }
-  .hero-type h1 { font-size: clamp(58px,18.9vw,102px); line-height: .91; letter-spacing: -.06em; }
-  .hero-type p { font-size: clamp(14px,3.8vw,20px); margin: 14px 0 25px; }
-  .hero-chat { height: 70px; flex-basis: 70px; }
-  .tools-icons { grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(9px,3vw,16px); }
-  .tool-icon { width: 100%; height: auto; max-width: 64px; aspect-ratio: 1; }
-}
-
-@media (max-width: 359px) {
-  .hero-type h1 { font-size: 18.8vw; }
-  .tool-icon { width: 100%; height: auto; max-width: 55px; aspect-ratio: 1; }
-}
-
-/* Give tool logos enough room in the two-column phone/tablet about layout. */
-@media (min-width: 461px) and (max-width: 760px) {
-  .tools-icons { grid-template-columns: repeat(3,minmax(0,1fr)); }
-}
-
-/* Keep the artist bio on the LEFT and a separate tool grid on the RIGHT
-   throughout the phone layout, rather than stacking or overlapping them. */
-@media (max-width: 760px) {
-  .about-panel {
-    display: grid;
-    grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
-    column-gap: clamp(10px, 3vw, 23px);
-    align-items: start;
-  }
-
-  .about-panel > h2, .about-panel > .about-name { grid-column: 1 / -1; }
-  .about-copy { grid-column: 1; grid-row: 3; min-width: 0; }
-
-  .tools-heading {
-    grid-column: 2;
-    grid-row: 3;
-    align-self: start;
-    margin: 0;
-    font-size: clamp(15px, 3.5vw, 22px);
-  }
-
-  .tools-icons {
-    grid-column: 2;
-    grid-row: 3;
-    align-self: start;
-    width: 100%;
-    max-width: none;
-    margin-top: clamp(29px, 6vw, 43px);
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(6px, 1.8vw, 13px);
-    justify-items: center;
-  }
-
-  .tool-icon { width: 100%; height: auto; aspect-ratio: 1; max-width: 64px; object-fit: contain; }
-}
-
-/* Final alignment refinements — retain existing layouts, artwork and breakpoints. */
-.tool-icon-procreate-frame {
-  display: block;
-  width: 100%;
-  max-width: 78px;
-  aspect-ratio: 1;
-  position: relative;
+body:has(dialog[open]) {
   overflow: hidden;
-  justify-self: center;
 }
 
-/* Match Figma's source-image crop: the source contains large side margins. */
-.tool-icon-procreate-frame .tool-icon-procreate {
-  position: absolute;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+img {
   display: block;
-  width: 180.15%;
-  height: 102.7%;
-  max-width: none;
-  max-height: none;
-  top: -1.35%;
-  left: -40.74%;
-  object-fit: fill;
-  aspect-ratio: auto;
-}
-
-/* Fixed icon column keeps all four contact labels aligned. */
-.contact-links a {
-  display: grid;
-  grid-template-columns: clamp(22px,2.55vw,49px) minmax(0,max-content);
-  align-items: center;
-  column-gap: min(2.4vw,46px);
-  width: fit-content;
   max-width: 100%;
 }
 
-.contact-links svg {
+h1, h2, h3, p, figure {
+  margin: 0;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #fa7d77;
+  outline-offset: 5px;
+}
+
+mark {
+  color: #fff;
+  background: var(--red);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.page-frame {
+  position: relative;
+  max-width: 1920px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 500;
+  top: -80px;
+  left: 15px;
+  padding: 12px 18px;
+  color: #fff;
+  background: var(--ink);
+}
+
+.skip-link:focus {
+  top: 10px;
+}
+
+/* Header */
+
+.site-header,
+.desktop-nav,
+.hero-chat,
+.red-action,
+.section-switcher,
+.section-switcher a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.site-header {
+  position: absolute;
+  z-index: 100;
+  inset: 0 0 auto;
+  align-items: flex-start;
+  padding: 27px 4.16%;
+  color: var(--red);
+}
+
+.site-signature {
+  flex-shrink: 0;
+  font-size: clamp(14px, 1.67vw, 32px);
+  font-weight: 300;
+}
+
+.header-email {
+  color: #811919;
+  font-size: clamp(11px, 1.04vw, 20px);
+}
+
+.desktop-nav {
+  padding-top: 6px;
+  font-size: clamp(10px, .83vw, 15px);
+  text-transform: uppercase;
+}
+
+.desktop-nav a {
+  opacity: .68;
+}
+
+.desktop-nav a:hover,
+.desktop-nav [aria-current] {
+  opacity: 1;
+}
+
+.site-header a:hover,
+.desktop-nav [aria-current] {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.header-on-image,
+.header-on-image .header-email {
+  color: #fff;
+}
+
+.menu-toggle,
+.mobile-nav,
+.dialog-controls {
+  display: none;
+}
+
+/* Home */
+
+.home-hero,
+.work-hero {
+  position: relative;
+  height: min(56.25vw, 1080px);
+  overflow: hidden;
+}
+
+.home-hero {
+  min-height: 510px;
+}
+
+.artist-portrait {
+  position: absolute;
+  top: 10%;
+  left: 2.6%;
+  width: 43.86%;
+  height: 87.22%;
+  object-fit: contain;
+  object-position: bottom left;
+}
+
+.hero-type {
+  position: absolute;
+  top: 10%;
+  left: 42%;
+  width: 62%;
+}
+
+.hero-type h1 {
+  font-size: clamp(75px, 15.68vw, 301px);
+  line-height: 1;
+  letter-spacing: -.04em;
+  white-space: nowrap;
+}
+
+.hero-type h1 span {
   display: block;
+}
+
+.hero-type p {
+  margin: .12em 0 0 .1em;
+  font-size: clamp(16px, 2.08vw, 40px);
+}
+
+.hero-chat,
+.red-action {
+  color: #fff;
+  background: var(--red);
+  font-weight: 700;
+}
+
+.hero-chat {
+  position: absolute;
+  top: 75.9%;
+  left: 42.8%;
+  width: 68.5%;
+  height: 12.6%;
+  padding: 0 2%;
+  font-size: clamp(23px, 3.33vw, 64px);
+}
+
+.hero-chat:hover,
+.red-action:hover {
+  background: #a82a2c;
+}
+
+.hero-chat span,
+.red-action span {
+  opacity: 0;
+}
+
+.hero-chat:hover span,
+.red-action:hover span {
+  opacity: 1;
+}
+
+.home-grid,
+.tools-icons,
+.game-layout,
+.game-small-images,
+.game-screens,
+.illustration-gallery,
+.victorian-study,
+.sketch-stack,
+.potion-row,
+.hunters-row,
+.cave-intro {
+  display: grid;
+  gap: var(--gap);
+}
+
+.home-grid {
+  position: relative;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: min(2.44vw, 47px) 4.16% min(4.55vw, 87px);
+}
+
+.about-panel,
+.game-aside {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.about-panel {
+  display: flex;
+  flex-direction: column;
+  margin-top: -28px;
+}
+
+.about-panel h2 {
+  font-size: clamp(38px, 6.61vw, 127px);
+  line-height: 1.13;
+  letter-spacing: -.075em;
+}
+
+.about-name {
+  margin-bottom: min(1.9vw, 36px);
+  font-size: clamp(15px, 2.08vw, 40px);
+  text-align: right;
+}
+
+.about-copy h3,
+.tools-heading,
+.game-description h3,
+.concept-description h2 {
+  margin-bottom: var(--gap);
+  font-size: clamp(20px, 1.67vw, 32px);
+  line-height: 1.25;
+}
+
+.about-copy p,
+.game-description p,
+.concept-description p {
+  margin-bottom: var(--gap);
+  font-size: clamp(14px, 1.25vw, 24px);
+  line-height: 1.4;
+}
+
+.tools-heading {
+  margin-top: auto;
+}
+
+.tools-icons {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  place-items: center;
+}
+
+.tool-icon,
+.tool-icon-procreate-frame {
+  width: 100%;
+  max-width: 78px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.tool-icon-procreate-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-icon-procreate-frame img {
+  position: absolute;
+  top: -1.35%;
+  left: -40.74%;
+  width: 180.15%;
+  height: 102.7%;
+  max-width: none;
+  object-fit: fill;
+}
+
+/* Portfolio tiles */
+
+.category-tile {
+  position: relative;
+  height: min(51.4vw, 987px);
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+}
+
+.category-image,
+.work-hero-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-image {
+  z-index: -2;
+  transition: transform .4s;
+}
+
+.tile-game .category-image {
+  object-position: 49% 45%;
+}
+
+.tile-illustration .category-image {
+  object-position: 55% center;
+}
+
+.category-tile::after {
+  position: absolute;
+  z-index: -1;
+  inset: 55% 0 0;
+  background: linear-gradient(transparent, #0007);
+  content: "";
+}
+
+.category-tile:hover .category-image {
+  transform: scale(1.045);
+}
+
+.tile-number {
+  position: absolute;
+  top: -5%;
+  left: -2%;
+  font-size: clamp(120px, 15.625vw, 300px);
+  font-weight: 700;
+  line-height: .93;
+  letter-spacing: -.09em;
+}
+
+.tile-bottom {
+  position: absolute;
+  inset: auto 0 3%;
+  text-align: center;
+}
+
+.tile-bottom strong,
+.tile-bottom small {
+  display: block;
+}
+
+.tile-bottom strong {
+  font-size: clamp(17px, 2.5vw, 48px);
+}
+
+.tile-bottom small {
+  font-size: clamp(9px, 1.04vw, 20px);
+}
+
+/* Contact */
+
+.contact-footer {
+  padding: min(2.25vw, 43px) 4.16% min(3.3vw, 64px);
+  color: #fff;
+  background: var(--red);
+}
+
+.contact-wrap h2 {
+  margin-bottom: 10px;
+  font-size: clamp(44px, 5vw, 96px);
+}
+
+.contact-links a {
+  display: grid;
+  grid-template-columns: clamp(22px, 2.55vw, 49px) minmax(0, 1fr);
+  align-items: center;
+  gap: min(2.4vw, 46px);
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 7px;
+  font-size: clamp(19px, 3.33vw, 64px);
+  line-height: 1.18;
+}
+
+.contact-links svg {
   width: 100%;
   height: auto;
   aspect-ratio: 1;
-  place-self: center;
 }
 
-@media (min-width: 1101px) {
-  /* Tool rows finish on the same baseline as the portfolio picture tiles. */
-  .about-panel { display: flex; flex-direction: column; }
-  .tools-heading { margin-top: auto; }
-  .tools-icons { margin-top: 0; }
-
-  /* The 3D blockout and the Walkthrough button share the same bottom edge. */
-  .victorian-blockout { aspect-ratio: 819 / 664; }
-  .victorian-blockout img { object-fit: cover; }
+.contact-links span {
+  overflow-wrap: anywhere;
 }
 
-@media (max-width: 1100px) {
-  .tool-icon-procreate-frame { max-width: 64px; }
+/* Work pages */
+
+.work-hero {
+  min-height: 400px;
+  color: #fff;
+  background: #4b544e;
 }
 
-@media (max-width: 540px) {
-  .contact-links a { grid-template-columns: 23px minmax(0,1fr); column-gap: 12px; }
+.work-hero::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #0004, transparent 74%);
+  pointer-events: none;
+  content: "";
 }
 
-@media (max-width: 359px) {
-  .tool-icon-procreate-frame { max-width: 55px; }
+.work-hero-titles {
+  position: absolute;
+  z-index: 1;
+  inset: 34.8% 4.16% auto;
+  line-height: 1.13;
+}
+
+.work-hero-titles p {
+  font-size: clamp(23px, 3.33vw, 64px);
+}
+
+.work-hero-titles h1 {
+  font-size: clamp(38px, 5vw, 96px);
+}
+
+.game-content {
+  padding-top: min(2.6vw, 50px);
+}
+
+.project-title {
+  margin-bottom: min(1.8vw, 34px);
+  color: var(--red);
+  font-size: clamp(33px, 3.82vw, 73px);
+  line-height: 1.18;
+}
+
+.game-layout {
+  position: relative;
+  grid-template-columns: 30.5% minmax(0, 1fr);
+  align-items: start;
+  padding-left: 4.16%;
+}
+
+.red-action {
+  padding: min(.94vw, 18px) min(1.56vw, 30px);
+  font-size: clamp(19px, 2.08vw, 40px);
+}
+
+.game-aside > .red-action {
+  margin-left: calc(-1 * min(4.16vw, 80px));
+}
+
+.game-small-images,
+.game-description {
+  width: 75%;
+  margin: min(2vw, 38px) 0 0 auto;
+}
+
+.game-hand {
+  position: absolute;
+  z-index: 3;
+  top: 3.5vw;
+  left: 5%;
+  width: 9.32%;
+  transform: rotate(25.82deg);
+  transform-origin: top;
+  pointer-events: none;
+}
+
+/* Artwork: natural image proportions replace individual aspect ratios. */
+
+.artwork-zoom {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.artwork-zoom img {
+  width: 100%;
+  height: auto;
+}
+
+.artwork-zoom:hover img {
+  filter: brightness(.95);
 }
 
 .artwork-static {
@@ -664,126 +528,507 @@ body[data-route="concepts"] .section-switcher { margin-top: min(8.3vw,160px); ma
   filter: none;
 }
 
-/* Align title and PLAAAY button to the left edge */
-@media (min-width: 1101px) {
-  .game-content .project-title {
-    margin-left: 0;
-  }
+.illustration-gallery,
+.concept-gallery {
+  padding-top: var(--gap);
+}
 
-  .game-aside > .red-action {
-    margin-left: calc(-1 * min(4.16vw, 80px));
-    width: calc(100% + min(4.16vw, 80px));
+.victorian-study {
+  grid-template-columns: 29.17% 42.65% 22.08%;
+  align-items: start;
+  gap: .9%;
+  margin-top: var(--gap);
+}
+
+.victorian-blockout img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.concept-description {
+  padding: 0 12px;
+}
+
+.concept-description .red-action {
+  margin-top: var(--gap);
+  font-size: clamp(15px, 1.9vw, 38px);
+}
+
+.art-separator {
+  height: var(--gap);
+  margin: var(--gap) 0;
+  background: #d9d9d9;
+}
+
+.potion-row {
+  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
+  margin-top: var(--gap);
+}
+
+.hunters-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cave-intro {
+  grid-template-columns: 35.1% 22.1%;
+  align-items: start;
+}
+
+.cave-copy {
+  padding-top: var(--gap);
+}
+
+.house-variations {
+  margin-top: var(--gap);
+}
+
+/* Navigation and overlays */
+
+.section-switcher {
+  margin: min(8.3vw, 160px) auto min(7.1vw, 136px);
+  padding: 0 12.25%;
+}
+
+.section-switcher a {
+  font-size: clamp(21px, 3.33vw, 64px);
+}
+
+.section-switcher a:hover {
+  color: var(--red);
+}
+
+.highlight-extensions {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.highlight-extension {
+  position: absolute;
+  background: var(--red);
+}
+
+.art-dialog {
+  width: min(95vw, 1600px);
+  max-width: none;
+  max-height: 94vh;
+  padding: 40px 20px 20px;
+  border: 0;
+  color: #fff;
+  background: transparent;
+}
+
+.art-dialog::backdrop {
+  background: rgb(0 0 0 / 90%);
+}
+
+.dialog-close {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  width: 45px;
+  height: 45px;
+  color: inherit;
+  background: transparent;
+  font-size: 35px;
+}
+
+.dialog-figure {
+  text-align: center;
+}
+
+.dialog-figure img {
+  width: auto;
+  max-height: calc(94vh - 110px);
+  margin: auto;
+  object-fit: contain;
+  touch-action: pan-y pinch-zoom;
+}
+
+.dialog-figure figcaption {
+  padding-top: 12px;
+  font-size: 24px;
+}
+
+/* Tablet */
+
+@media (max-width: 1100px) {
+  .header-email {
+    display: none;
   }
 }
 
-@media (max-width: 760px) {
-  .contact-links a {
+@media (max-width: 1000px) {
+  .site-header {
+    position: fixed;
+    align-items: center;
+    height: 66px;
+    padding: 10px 5%;
+    color: var(--red);
+    background: rgb(255 255 255 / 97%);
+  }
+
+  .site-signature {
+    font-size: 20px;
+  }
+
+  .desktop-nav,
+  .game-hand {
+    display: none;
+  }
+
+  .menu-toggle {
     display: grid;
-    grid-template-columns: 25px minmax(0, 1fr);
-    column-gap: 19px;
+    gap: 5px;
+    width: 44px;
+    padding: 11px 8px;
+    color: inherit;
+    background: transparent;
+  }
+
+  .menu-toggle span {
+    height: 2px;
+    background: currentColor;
+  }
+
+  .mobile-nav:not([hidden]) {
+    position: fixed;
+    inset: 66px 0 auto;
+    display: grid;
+    max-height: calc(100dvh - 66px);
+    padding: 10px 5% 18px;
+    overflow-y: auto;
+    color: var(--ink);
+    background: #fff;
+    box-shadow: 0 16px 30px #0002;
+    animation: menuDrop .25s ease-out;
+    z-index: 10;
+  }
+
+  .mobile-nav a {
+    padding: 14px 8px;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+  }
+
+  .mobile-nav [aria-current] {
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  .home-grid,
+  .game-aside,
+  .victorian-study,
+  .cave-intro {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-grid {
+    padding: 38px 5% 48px;
+  }
+
+  .about-panel,
+  .category-tile:last-child,
+  .game-aside > .red-action,
+  .victorian-study .concept-description {
+    grid-column: 1 / -1;
+  }
+
+  .about-panel {
+    display: block;
+    margin: 0 0 20px;
+  }
+
+  .about-panel h2 {
+    font-size: 90px;
+  }
+
+  .about-name {
+    font-size: 29px;
+  }
+
+  .tools-heading {
+    margin-top: 24px;
+  }
+
+  .tools-icons {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    max-width: 570px;
+  }
+
+  .tool-icon,
+  .tool-icon-procreate-frame {
+    max-width: 64px;
+  }
+
+  .category-tile {
+    height: 65vw;
+  }
+
+  .category-tile:last-child {
+    height: 58vw;
+  }
+
+  .tile-bottom strong {
+    font-size: 34px;
+  }
+
+  .tile-bottom small {
+    font-size: 14px;
+  }
+
+  .game-layout {
+    grid-template-columns: 1fr;
+    padding: 0 5%;
+  }
+
+  .game-aside {
+    display: grid;
+    gap: var(--gap);
+  }
+
+  .game-aside > .red-action {
+    margin: 0;
+  }
+
+  .game-small-images,
+  .game-description {
+    width: 100%;
+    margin: 0;
+  }
+
+  .project-title {
+    margin-inline: 5%;
+  }
+
+  .red-action {
+    padding: 14px 20px;
+  }
+
+  .concept-description {
+    padding: 14px 5%;
+  }
+
+  .section-switcher {
+    padding: 0 5%;
+  }
+}
+
+/* Phone */
+
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 80px;
   }
 
   .home-hero {
     display: grid;
     grid-template-columns: 54% 46%;
-    grid-template-rows: minmax(260px, 62vw) 74px;
-    padding-top: 70px;
+    align-items: center;
     height: auto;
     min-height: 0;
-    align-items: center;
+    padding-top: 70px;
   }
 
   .artist-portrait {
     position: relative;
-    grid-column: 1;
-    grid-row: 1;
-    order: 0;
-    width: 115%;
-    max-width: none;
-    height: 100%;
     top: auto;
     left: -7%;
-    margin: 0;
-    object-fit: contain;
-    object-position: left bottom;
+    width: 115%;
+    height: max(260px, 62vw);
+    max-width: none;
   }
 
   .hero-type {
-    position: relative;
-    grid-column: 2;
-    grid-row: 1;
-    align-self: center;
-    order: 0;
-    top: auto;
-    left: auto;
-    right: auto;
-    width: 100%;
-    padding: 0 3% 0 0;
-    margin: 0;
+    position: static;
+    z-index: 1;
+    width: auto;
   }
 
   .hero-type h1 {
     font-size: clamp(34px, 10.5vw, 78px);
     line-height: .95;
     letter-spacing: -.065em;
-    white-space: nowrap;
   }
 
   .hero-type p {
+    margin-top: 12px;
     font-size: clamp(10px, 2.3vw, 17px);
-    line-height: 1.2;
-    white-space: normal;
-    margin: 12px 0 0;
   }
 
-  .hero-chat > span,
-  .hero-chat > svg,
-  .hero-chat::after,
-  .red-action > span,
-  .red-action > svg,
-  .red-action::after {
-    display: none !important;
-    content: none !important;
+  .hero-chat {
+    position: static;
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 74px;
+    padding: 0 5%;
+    font-size: 30px;
   }
 
-  .mobile-nav:not([hidden]) {
-    animation: menuDrop 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
-    transform-origin: top center;
+  .hero-chat span,
+  .red-action span {
+    display: none;
   }
 
-  @keyframes menuDrop {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
+  .about-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+    gap: 12px;
+  }
 
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .about-panel h2,
+  .about-name {
+    grid-column: 1 / -1;
+  }
+
+  .about-panel h2 {
+    font-size: clamp(68px, 17vw, 94px);
+  }
+
+  .about-name {
+    margin-bottom: 12px;
+    font-size: 24px;
+  }
+
+  .about-copy {
+    grid-area: 3 / 1;
+  }
+
+  .tools-heading,
+  .tools-icons {
+    grid-area: 3 / 2;
+    align-self: start;
+    margin: 0;
+  }
+
+  .tools-heading {
+    font-size: clamp(15px, 3.5vw, 22px);
+  }
+
+  .tools-icons {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 36px;
+  }
+
+  .about-copy p,
+  .game-description p,
+  .concept-description p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .contact-footer {
+    padding: 30px 5% 42px;
+  }
+
+  .contact-links a {
+    grid-template-columns: 25px minmax(0, 1fr);
+    gap: 19px;
+    min-height: 42px;
+    font-size: clamp(15px, 4vw, 30px);
+  }
+
+  .work-hero {
+    height: 420px;
+    min-height: 0;
+  }
+
+  .work-hero-titles {
+    inset: auto 5% 16%;
+  }
+
+  .work-hero-titles p {
+    font-size: clamp(21px, 5vw, 34px);
+  }
+
+  .work-hero-titles h1 {
+    font-size: clamp(30px, 8vw, 63px);
+  }
+
+  .project-title {
+    font-size: clamp(30px, 8vw, 56px);
+    overflow-wrap: anywhere;
+  }
+
+  .potion-row,
+  .hunters-row {
+    grid-template-columns: 1fr;
+  }
+
+  .section-switcher {
+    margin: 55px auto;
+  }
+
+  .section-switcher a {
+    min-height: 48px;
+    font-size: clamp(15px, 3vw, 26px);
+  }
+
+  .art-dialog {
+    width: 100%;
+    max-height: 100dvh;
+    padding: 50px 12px 16px;
+  }
+
+  .dialog-figure img {
+    max-height: calc(100dvh - 130px);
+  }
+}
+
+@media (max-width: 540px) {
+  .home-grid,
+  .game-aside,
+  .cave-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .game-small-images {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .category-tile,
+  .category-tile:last-child {
+    height: min(118vw, 500px);
+  }
+
+  .tile-number {
+    font-size: clamp(128px, 40vw, 196px);
+  }
+
+  .tile-bottom {
+    bottom: 6%;
+  }
+
+  .section-switcher {
+    display: grid;
+    gap: 0;
+  }
+
+  .section-switcher a {
+    min-height: 62px;
+    border-bottom: 1px solid #ddd;
+    font-size: 20px;
+  }
+}
+
+@keyframes menuDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mobile-nav:not([hidden]) {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
   }
-}
-
-}
-
-/* Latest artworks: preserve their actual proportions rather than cropping. */
-.potion-top { aspect-ratio: 640 / 268; }
-.potion-row { grid-template-columns: minmax(0,45fr) minmax(0,55fr); }
-.potion-row > .artwork-zoom { aspect-ratio: 640 / 374; }
-.potion-row > .artwork-zoom:last-child { aspect-ratio: 640 / 304; }
-.potion-top img, .potion-row img { object-fit: contain; }
-.hunters-row { grid-template-columns: repeat(3, minmax(0,1fr)); padding: 0; }
-.hunter-art .artwork-zoom { aspect-ratio: 640 / 398; }
-
-@media (max-width: 760px) {
-  .hunters-row { grid-template-columns: minmax(0,1fr); padding: 0 3%; }
-  .potion-row { grid-template-columns: minmax(0,1fr); }
-  .potion-row > .artwork-zoom,
-  .potion-row > .artwork-zoom:last-child { aspect-ratio: auto; }
 }
