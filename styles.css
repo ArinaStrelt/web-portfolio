@@ -998,6 +998,7 @@ mark {
   }
 
   .section-switcher {
+    padding: 0 5%;
     margin: 55px auto;
   }
 
@@ -1042,8 +1043,7 @@ mark {
   }
 
   .section-switcher {
-    display: grid;
-    gap: 0;
+    padding: 0 5%;
   }
 
   .section-switcher a {
