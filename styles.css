@@ -466,6 +466,7 @@ mark {
   color: var(--red);
   font-size: clamp(33px, 3.82vw, 73px);
   line-height: 1.18;
+  padding-left: 4.16%;
 }
 
 .game-layout {
@@ -476,12 +477,8 @@ mark {
 }
 
 .red-action {
-  padding: min(.94vw, 18px) min(1.56vw, 30px);
+  padding: 20px min(1.56vw, 30px);
   font-size: clamp(19px, 2.08vw, 40px);
-}
-
-.game-aside > .red-action {
-  margin-left: calc(-1 * min(4.16vw, 80px));
 }
 
 .game-small-images,
@@ -492,8 +489,8 @@ mark {
 
 .game-hand {
   position: absolute;
-  z-index: 3;
-  top: 3.5vw;
+  z-index: 0;
+  top: 100px;
   left: 5%;
   width: 9.32%;
   transform: rotate(25.82deg);
@@ -825,7 +822,8 @@ mark {
   }
 
   .project-title {
-    margin-inline: 5%;
+    padding: 0 5%;
+    
   }
 
   .red-action {
@@ -1043,7 +1041,8 @@ mark {
   }
 
   .section-switcher {
-    padding: 0 5%;
+    display:flex;
+    gap: 0;
   }
 
   .section-switcher a {
